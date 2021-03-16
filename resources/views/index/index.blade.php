@@ -16,7 +16,7 @@
     @foreach ($collections as $collection)
     
             <div class="col-3 p-5 m-2 h4 bg-dark text-white text-center"> 
-                <a href="{{route('index.show',[$collection->collection_name,1])}}">
+                <a href="{{route('index.show',[$collection->collection_name,0])}}">
                 {{$collection->collection_name}}
                 </a>
             </div>         

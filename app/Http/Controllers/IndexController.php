@@ -70,11 +70,12 @@ class IndexController extends Controller
     public function show(Collection $collection, $card_id)
     {
         $cards = $collection->cards;
-        $card = $cards->get($card_id-1);
+        $card = $cards->get($card_id);
         if($card){
         return view('index.show',[
             'collection'=>$collection,
-            'card'=>$card
+            'card'=>$card,
+            'card_id'=>$card_id
         ]);
         }
         else{

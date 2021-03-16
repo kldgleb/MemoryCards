@@ -2,7 +2,7 @@
 
 @section('content')
 <h1 class="text-center">
-    <a href="{{route('index.show',[$collection->collection_name,1])}}">
+    <a href="{{route('index.show',[$collection->collection_name,0])}}">
         {{$collection->collection_name}}
     </a>
 </h1>
@@ -36,7 +36,7 @@
         </div>
         <div class="col-2">
             <a class="arrow right svg-button"
-                href="{{route('index.show',[$collection->collection_name,1])}}">
+                href="{{route('index.show',[$collection->collection_name,0])}}">
                 <svg version="1.0" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	                 width="100px" height="100px" viewBox="0 0 1200 1199.999" enable-background="new 0 0 1200 1199.999" xml:space="preserve">
                 <g>
