@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\IndexController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,10 +14,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::view('/create','index.create')->name('index.create');
+Route::get('/',[IndexController::class,'index'])->name('index');
+Route::get('/{collection}/{card}',[IndexController::class,'show'])->name('index.show');
+Route::get('/{collection}/addCard', [IndexController::class, 'addCard'])->name('addCard');
+Route::post('/{collection}/storeCard', [IndexController::class, 'storeCard'])->name('storeCard');
 
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+

@@ -6,3 +6,83 @@
 
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
+
+.border-add{
+    border: 1px dotted #6c757d;
+}
+
+.p-10 {
+    padding: 6rem !important;
+}
+
+.mh-70{
+    min-height: 70vh;   
+}
+
+#text{
+    margin-top: 5%;
+    height: 40vh;
+    width: 70%;
+}
+#collection_name{
+    margin-bottom: 5%;
+    font-size: large;
+}
+#collection_description{
+    margin-bottom: 5%;
+    height: 20vh;
+    width: 40%;
+}
+
+.svg-button {
+  -webkit-appearance: none;
+  background: transparent;
+  border: 0;
+  outline:0;
+}
+
+svg {
+  padding: 5px;
+}
+
+.arrow {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  margin-top: -45px;
+  margin-left: -35px;
+  width: 70px;
+  height: 90px;
+}
+
+.left {
+  left: 42%;
+}
+
+.right {
+  left: 58%;
+}
+
+.left:hover polyline,
+.left:focus polyline {
+  stroke-width: 3;
+}
+
+.left:active polyline {
+  stroke-width: 6;
+  transition: all 100ms ease-in-out;
+}
+
+.right:hover polyline,
+.right:focus polyline {
+  stroke-width: 3;
+}
+
+.right:active polyline {
+  stroke-width: 6;
+  transition: all 100ms ease-in-out;
+}
+
+polyline {
+  transition: all 250ms ease-in-out;
+}
