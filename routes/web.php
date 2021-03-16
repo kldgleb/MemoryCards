@@ -13,12 +13,14 @@ use App\Http\Controllers\IndexController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::view('/create','index.create')->name('index.create');
 Route::get('/',[IndexController::class,'index'])->name('index');
 Route::get('/{collection}/{card}',[IndexController::class,'show'])->name('index.show');
-Route::get('/{collection}/addCard', [IndexController::class, 'addCard'])->name('addCard');
-Route::post('/{collection}/storeCard', [IndexController::class, 'storeCard'])->name('storeCard');
+
+Route::group(['middleware' => 'auth'], function(){
+    Route::view('/create','index.create')->name('index.create');
+    Route::get('/{collection}/addCard', [IndexController::class, 'addCard'])->name('addCard');
+    Route::post('/{collection}/storeCard', [IndexController::class, 'storeCard'])->name('storeCard');
+});
 
 Auth::routes();
 
