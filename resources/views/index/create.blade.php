@@ -13,7 +13,8 @@
             <h3>    
                 <label class="text-white h3" for="header">Описание коллекции: </label>
                 <br>
-                <input id="collection_description" name="collection_description" placeholder="description"/>
+                <textarea id="collection_description" name="collection_description" 
+                    placeholder="description"></textarea>
             </h3>
             <br>
             @if ($errors->any())

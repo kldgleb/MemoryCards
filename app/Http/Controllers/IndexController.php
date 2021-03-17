@@ -40,7 +40,11 @@ class IndexController extends Controller
      */
     public function store(CollectionRequest $request)
     {
-        Collection::create($request->validated());
+        Collection::create([
+            'user_id'=>auth()->user()->id,
+            'collection_name'=>$request->collection_name,
+            'collection_description'=>$request->collection_description,
+        ]);
 
         return redirect()->route('addCard',$request->collection_name);
     }

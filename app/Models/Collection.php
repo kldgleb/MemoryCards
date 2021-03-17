@@ -9,7 +9,7 @@ class Collection extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['collection_name','collection_description'];
+    protected $fillable = ['user_id','collection_name','collection_description'];
 
     public function getRouteKeyName(){
         return 'collection_name';
