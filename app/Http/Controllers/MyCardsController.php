@@ -4,12 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\CollectionRequest;
+use App\Http\Requests\CardRequest;
 use App\Models\Collection;
 
 class MyCardsController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display a list of the collections of cards.
      *
      * @return \Illuminate\Http\Response
      */
@@ -20,27 +21,6 @@ class MyCardsController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //EXCEPT
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //EXCEPT
-    }
-
-    /**
      * Display the specified resource.
      *
      * @param  int  $id
@@ -48,12 +28,13 @@ class MyCardsController extends Controller
      */
     public function show($id)
     {
+        //EXCEPT
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Show the form for editing Collection.
      *
-     * @param  int  $id
+     * @param  string $collection_name
      * @return \Illuminate\Http\Response
      */
     public function edit($collection_name)
@@ -62,40 +43,41 @@ class MyCardsController extends Controller
                                     ->where('user_id',auth()->user()->id)->first();
         
         if($collection){
-        return view('MyCards.edit',[
-            'collection' => $collection
-        ]);
-        }else{
-            abort('404');
-        }
+            return view('MyCards.edit',[
+                'collection' => $collection
+            ]);
+        }else abort('404');
     }
     /**
-     * Show the form for editing the specified resource.
+     * Show the form for editing Card.
      *
-     * @param  int  $id
+     * @param  string  $collection_name 
+     * @param  int  $card_id 
      * @return \Illuminate\Http\Response
      */
-    public function editCard($collection_name,$card_id)
+    public function editCard($collection_name, $card_id)
     {
         $collection = Collection::where('collection_name', $collection_name)
                                     ->where('user_id',auth()->user()->id)->first();
         $card = $collection->cards->get($card_id);
         if($collection){
-        return view('MyCards.edit',[
-            'collection' => $collection,
-            'cards' => $cards,
-            'card' => $card
-        ]);
-        }else{
-            abort('404');
-        }
+            if($card){    
+                return view('MyCards.editCard',[
+                    'collection' => $collection,
+                    'card' => $card,
+                    'card_id' => $card_id
+                ]);
+            }else{
+            return view('MyCards.editEnd',compact('collection'));
+            }
+        }else return abort('404');   
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the Colection in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Http\Requests\CollectionRequest  $request
+     * @param  string  $collection_name
      * @return \Illuminate\Http\Response
      */
     public function update(CollectionRequest $request, $collection_name)
@@ -104,21 +86,64 @@ class MyCardsController extends Controller
                                     ->where('user_id',auth()->user()->id)->first();
         if($collection){
             $collection->update($request->validated());
-            return redirect()->route('MyCards.index');
-        }else{
-            abort('404');
-        }
+        }else abort('404');
+        return redirect()->route('MyCards.index');
         
+    }
+    /**
+     * Update the Card resource in storage.
+     *
+     * @param  \App\Http\Requests\CardRequest  $request
+     * @param  string  $collection_name
+     * @param  int  $card_id
+     * @return \Illuminate\Http\Response
+     */
+    public function updateCard(CardRequest $request, $collection_name, $card_id)
+    {
+        $collection = Collection::where('collection_name', $collection_name)
+                                    ->where('user_id',auth()->user()->id)->first();
+                                   
+        $card = $collection->cards->get($card_id);
+        if($card){
+            $card->update($request->validated());
+        }else abort('404');
+        
+        return redirect()->route('MyCards.editCard',[$collection_name,$card_id]);
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the Collection resource from storage.
      *
-     * @param  int  $id
+     * @param  string  $collection_name
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($collection_name)
     {
-        //
+        $collection = Collection::where('collection_name', $collection_name)
+                                    ->where('user_id',auth()->user()->id)->first();
+        $cards = $collection->cards;
+        foreach($cards as $card){
+            $card->delete();
+        }
+        $collection->delete();
+        return redirect()->route('MyCards.index');
+    }
+    /**
+     * Remove the Card resource from storage.
+     *
+     * @param  string  $collection_name
+     * @param  int  $card_id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroyCard($collection_name, $card_id)
+    {
+        $collection = Collection::where('collection_name', $collection_name)
+                                    ->where('user_id',auth()->user()->id)->first();
+        
+        $card = $collection->cards->get($card_id);
+        if($card){
+        $card->delete();
+        }else abort('404');
+        return redirect()->route('MyCards.editCard',[$collection_name,$card_id-1]);
     }
 }

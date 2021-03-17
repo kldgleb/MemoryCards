@@ -25,7 +25,7 @@ class CollectionRequest extends FormRequest
     {
         return [
             'collection_name' => 'min:3|max:50|required',
-            'collection_description' => 'max:50',
+            'collection_description' => 'max: 100',
         ];
     }
 }

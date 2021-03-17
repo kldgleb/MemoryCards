@@ -5,7 +5,11 @@
     Мои коллекции карточек запоминания:
 </h1>
 <h4 class="text-center text-muted">
+    @if(!$collections->isEmpty())
     Нажмите чтобы редактировать
+    @else
+    Вы еще не создали своих карточек 
+    @endif
 </h4>
 <div class="container">
     <div class="row justify-content-center">

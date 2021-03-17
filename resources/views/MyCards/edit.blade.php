@@ -4,15 +4,22 @@
 <form action="{{route('MyCards.update',$collection->collection_name)}}" method="POST">
     @csrf
     @method('PATCH')
-<h1 class="text-center">
-    Название коллекции:     
-    <input id="collection_name" name="collection_name" 
+<h1 class="text-center m-5">
+    Название коллекции:
+    <br>
+    <input  class="text-center" id="collection_name" name="collection_name" 
                     value="{{$collection->collection_name}}"/>
 </h1>
         <div class="container p-5">
             <div class="row justify-content-center">
                 <div class="col-2">
-                    
+                    <form action="{{route('MyCards.destroy',$collection->collection_name)}}">
+                    @csrf
+                    @method('DELETE')   
+                        <button class="btn btn-outline-danger p-2">
+                            <span>Удалить коллекцию</span>
+                        </button>
+                    </form>
                 </div>
                 <div class="col-8 text-center h3">    
                     <label for="collection_description">Описание коллекции: </label> 
@@ -21,7 +28,7 @@
                         placeholder="description">{{$collection->collection_description}}</textarea>
                 </div>
                 <div class="col-2">
-                    <a href="{{route('')}}" class="btn btn-outline-dark p-2">
+                    <a href="{{route('MyCards.editCard',[$collection->collection_name,0])}}" class="btn btn-outline-dark p-2">
                         <span>Перейти к редактированию карточек</span>
                     </a>
                 </div>

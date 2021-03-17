@@ -62,7 +62,7 @@ class IndexController extends Controller
             'text' => $request->text
         ]);
 
-        return redirect()->route('index');
+        return redirect()->route('addCard',$collection->collection_name);
     }
 
     /**
