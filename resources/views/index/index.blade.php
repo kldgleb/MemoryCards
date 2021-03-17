@@ -3,7 +3,7 @@
 @section('content')
     <a href="{{route('index.create')}}">
     <div class="container p-5 mb-5 text-center border-add">
-            <h1>Create new colection of cards</h1>
+            <h1>Создать коллекцию карточек</h1>
             <img src="/img/add.png" width="10%" height="10%"/>
     </div>
     </a>

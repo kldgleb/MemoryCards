@@ -9,13 +9,14 @@
         <div class="container p-5">
             <div class="row justify-content-center">
                 <div class="col-2">
-                    <button class="arrow left svg-button">
+                    <a class="arrow left svg-button"
+                            href="{{route('index.show',[$collection->collection_name,$card_id-1])}}">
                         <svg width="60px" height="80px" viewBox="0 0 50 80" xml:space="preserve">
                           <polyline fill="none" stroke="#000000" stroke-width="1" stroke-linecap="round" 
                           stroke-linejoin="round" points="
                           45.63,75.8 0.375,38.087 45.63,0.375 "/>
                         </svg>  
-                    </button>
+                    </a>
                 </div>
                 <div class="col-8 bg-dark text-center">    
                     <br>
