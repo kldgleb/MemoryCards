@@ -23,16 +23,15 @@
                 <div class="col-2">
     
                 </div>
-            
-                @if ($errors->any())
+            <button type="submit" class="btn btn-outline-dark">Перейти к добавлению карточек</button>
+            </div>
+            @if ($errors->any())
                     @foreach ($errors->all() as $error)
                         <div class="alert alert-danger" role="alert">
                             {{ $error }}
                         </div>
                     @endforeach
                 @endif
-            <button type="submit" class="btn btn-outline-dark">Перейти к добавлению карточек</button>
-            </div>
         </div>    
     </form>
 @endsection

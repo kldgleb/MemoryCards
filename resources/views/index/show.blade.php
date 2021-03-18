@@ -61,10 +61,11 @@
                 @endforeach
             </div>
         </div>       
+
+        <script>
+            function replaceContentInContainer(target, answer) {
+                document.getElementById(target).style.display = 'none';  
+                document.getElementById(answer).style.display = 'block';
+            }
+        </script>
 @endsection
-<script>
-    function replaceContentInContainer(target, answer) {
-        document.getElementById(target).style.display = 'none';  
-        document.getElementById(answer).style.display = 'block';
-    }
-</script>

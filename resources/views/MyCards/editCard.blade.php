@@ -9,24 +9,25 @@
 <h3 class="text-muted text-center">
     {{$collection->collection_description}}
 </h3>
-<form action="{{route('MyCards.updateCard',[$collection->collection_name, $card_id])}}" method="POST">
-    @csrf
-    @method('PATCH')
         <div class="container p-5">
             <div class="row justify-content-center">
                 <div class="col-2">
-                    <button class="arrow left svg-button">
+                    <a class="arrow left svg-button"
+                        href="{{route('MyCards.editCard',[$collection->collection_name,$card_id-1])}}">
                         <svg width="60px" height="80px" viewBox="0 0 50 80" xml:space="preserve">
                           <polyline fill="none" stroke="#000000" stroke-width="1" stroke-linecap="round" 
                           stroke-linejoin="round" points="
                           45.63,75.8 0.375,38.087 45.63,0.375 "/>
                         </svg>  
-                    </button>
+                    </a>
                 </div>
                 <div class="col-8 text-center bg-dark h3">  
                     <p class="text-white h1 m-3">
                         <label for="header">Заголовок карточки: </label>
                     </p>
+                    <form action="{{route('MyCards.updateCard',[$collection->collection_name, $card_id])}}" method="POST">
+                        @csrf
+                        @method('PATCH')
                     <input class="m-3 text-center" id="header" name="header" placeholder="header" value="{{$card->header}}"/>
                     <br>  
                     <label class="m-3 text-white" for="text">Ответ: </label> 
