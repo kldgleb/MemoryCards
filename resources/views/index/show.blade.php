@@ -2,11 +2,15 @@
 
 @section('content')
 
-<h1 class="text-center">
-    <a href="{{route('index.show',[$collection->collection_name,0])}}">
-        {{$collection->collection_name}}
-    </a>
-</h1>
+    <h1 class="text-center">
+        <a href="{{route('index.show',[$collection->collection_name,0])}}">
+            {{$collection->collection_name}}
+        </a>
+    </h1>
+    <h3 class="text-muted text-center">
+        {{$collection->collection_description}}
+    </h3>
+
         <div class="container p-5">
             <div class="row justify-content-center">
                 <div class="col-2">

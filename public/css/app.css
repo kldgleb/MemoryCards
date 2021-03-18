@@ -10083,3 +10083,10 @@ svg {
 polyline {
   transition: all 250ms ease-in-out;
 }
+
+.myImg {
+  -o-object-fit: cover;
+     object-fit: cover;
+  width: 80px;
+  height: 61px;
+}

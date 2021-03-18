@@ -6,6 +6,9 @@
         {{$collection->collection_name}}
     </a>
 </h1>
+<h3 class="text-muted text-center">
+    {{$collection->collection_description}}
+</h3>
 <form action="{{route('MyCards.updateCard',[$collection->collection_name, $card_id])}}" method="POST">
     @csrf
     @method('PATCH')
