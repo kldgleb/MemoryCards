@@ -34,6 +34,15 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
 
+                      <form action="{{route('search')}}" method="GET">  
+                        <li class="ml-5">
+                          <div class="input-group">
+                            <input type="search" name="q" class="form-control rounded" placeholder="Search" aria-label="Search"
+                              aria-describedby="search-addon" value=""/>
+                            <button type="submit" class="btn btn-outline-primary d-inline">search</button>
+                          </div>
+                        </li>
+                      </form>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
