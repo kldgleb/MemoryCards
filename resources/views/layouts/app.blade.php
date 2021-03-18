@@ -38,7 +38,7 @@
                         <li class="ml-5">
                           <div class="input-group">
                             <input type="search" name="q" class="form-control rounded" placeholder="Search" aria-label="Search"
-                              aria-describedby="search-addon" value=""/>
+                              aria-describedby="search-addon" value="{{request()->input('q')}}"/>
                             <button type="submit" class="btn btn-outline-primary d-inline">search</button>
                           </div>
                         </li>
