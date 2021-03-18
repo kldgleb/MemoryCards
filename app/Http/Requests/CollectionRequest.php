@@ -24,7 +24,7 @@ class CollectionRequest extends FormRequest
     public function rules()
     {
         return [
-            'collection_name' => 'min:3|max:50|required',
+            'collection_name' => 'min:3|max:50|required|unique:collections,collection_name',
             'collection_description' => 'max: 100',
         ];
     }

@@ -28,20 +28,20 @@
     @else
     <h3 class="text-center"> Никто еще не создал свою коллекцию карточек, будьте первым</h3>
     @endif
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+        let showDescription = document.querySelectorAll("#showDescription");
+        let target = document.querySelectorAll("#target");
+        for(let i = 0;i < showDescription.length;i++){
+            showDescription[i].addEventListener("mouseover", function() {
+                showDescription[i].style.display = 'none';  
+                target[i].style.display = 'block';  
+            });
+            target[i].addEventListener("mouseout", function() {
+                target[i].style.display = 'none';
+                showDescription[i].style.display = 'block';
+            });
+        }
+    });
+    </script>    
 @endsection
-<script>
-    document.addEventListener("DOMContentLoaded", () => {
-    let showDescription = document.querySelectorAll("#showDescription");
-    let target = document.querySelectorAll("#target");
-    for(let i = 0;i < showDescription.length;i++){
-        showDescription[i].addEventListener("mouseover", function() {
-            showDescription[i].style.display = 'none';  
-            target[i].style.display = 'block';  
-        });
-        target[i].addEventListener("mouseout", function() {
-            target[i].style.display = 'none';
-            showDescription[i].style.display = 'block';
-        });
-    }
-});
-</script>
