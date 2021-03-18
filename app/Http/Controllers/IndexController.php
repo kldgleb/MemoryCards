@@ -28,8 +28,10 @@ class IndexController extends Controller
      */
     public function addCard(Collection $collection)
     {
-
-        return view('index.addCard',compact('collection'));
+        $cards = $collection->cards;
+        return view('index.addCard',[
+            'collection'=>$collection,
+            'cards'=>$cards]);
     }
 
     /**

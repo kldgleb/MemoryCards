@@ -63,7 +63,7 @@
             <br>
             <div class="row justify-content-center">
                 <div class="col-8 text-center">
-                    <a href="{{route('MyCards.create')}}">    
+                    <a href="{{route('MyCards.createCard',$collection->collection_name)}}">    
                         <div class="container p-5 mb-5 text-center border-add">
                             <h1>Добавить карточку</h1>
                             <img src="/img/add.png" width="10%" height="10%"/>
@@ -71,5 +71,16 @@
                     </a>    
                 </div>
             </div>
+            <div class="container mb-5">
+                <div class="row justify-content-center">
+                    @foreach ($collection->cards as $card)
+                        <div class="col-3 bg-dark m-2 text-center text-white">
+                            <a class="d-block p-5" href="{{route('index.show',[$collection->collection_name,$loop->index])}}">
+                            {{$card->header}}
+                            </a>
+                        </div>
+                    @endforeach
+                </div>
+            </div>  
         </div>        
 @endsection

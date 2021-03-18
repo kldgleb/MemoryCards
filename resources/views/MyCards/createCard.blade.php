@@ -5,7 +5,7 @@
 <h1 class="text-center">
         {{$collection->collection_name}}
 </h1>
-<form action="{{route('storeCard',$collection->collection_name)}}" method="POST">
+<form action="{{route('MyCards.storeCard',$collection->collection_name)}}" method="POST">
         @csrf
         <div class="container p-5">
         
@@ -37,8 +37,8 @@
                 <br>
             </div>
             <div class="col-2">
-                    <a href="{{route('index')}}" class="btn btn-outline-dark p-2">
-                        <span>Завершить создание коллекции</span>
+                    <a href="{{route('MyCards.editCard',[$collection->collection_name,0])}}" class="btn btn-outline-dark p-2">
+                        <span>Вернуться к редактированию коллекции</span>
                     </a>
             </div>
         @if ($errors->any())
@@ -50,17 +50,6 @@
         @endif
         <button type="submit" class="btn btn-outline-light">Сохранить</button>
     </div>
-    @if($cards)
-    <div class="container mb-5">
-        <div class="row justify-content-center">
-            @foreach ($cards as $card)
-                <div class="col-3 p-5 bg-dark m-2 text-center text-white">
-                    {{$card->header}}
-                </div>
-            @endforeach
-        </div>
-    </div>
-    @endif  
 </form>
 
 @endsection
