@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+
 <h1 class="text-center">
     <a href="{{route('index.show',[$collection->collection_name,0])}}">
         {{$collection->collection_name}}
@@ -44,7 +45,18 @@
                     </a>
                 </div>
             </div>
-        </div>    
+        </div> 
+        <div class="container mb-5">
+            <div class="row justify-content-center">
+                @foreach ($collection->cards as $card)
+                    <div class="col-3 bg-dark m-2 text-center text-white">
+                        <a class="d-block p-5" href="{{route('index.show',[$collection->collection_name,$loop->index])}}">
+                        {{$card->header}}
+                        </a>
+                    </div>
+                @endforeach
+            </div>
+        </div>       
 @endsection
 <script>
     function replaceContentInContainer(target, answer) {

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\CollectionRequest;
 use App\Http\Requests\CardRequest;
 use App\Models\Collection;
+use App\Models\Card;
 
 class MyCardsController extends Controller
 {
@@ -71,6 +72,31 @@ class MyCardsController extends Controller
             return view('MyCards.editEnd',compact('collection'));
             }
         }else return abort('404');   
+    }
+
+    public function createCard($collection_name){
+        $collection = Collection::where('collection_name', $collection_name)
+                                    ->where('user_id',auth()->user()->id)->first();
+        if($collection){
+            return view('MyCards.createCard',[
+                'collection' => $collection
+            ]);
+        }else return abort('404');
+
+    }
+
+    public function storeCard(CardRequest $request, $collection_name){
+        $collection = Collection::where('collection_name', $collection_name)
+                                    ->where('user_id',auth()->user()->id)->first();
+        if($collection){
+        Card::create([
+            'collection_id' => $collection->id,
+            'header' => $request->header,
+            'text' => $request->text
+        ]);
+        }else abort('404');
+
+        return redirect()->route('MyCards.editCard',[$collection_name,0]);
     }
 
     /**
