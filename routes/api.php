@@ -3,6 +3,10 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
+
+use App\Http\Controllers\Api\CardController;
+use App\Http\Controllers\Api\CollectionController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -17,3 +21,9 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::group(['middleware' => 'auth:api', 'prefix' => '{collection}'], function(){
+    Route::resource('card', CardController::class);
+});
+
+Route::middleware('auth:api')->resource('collection', CollectionController::class);
