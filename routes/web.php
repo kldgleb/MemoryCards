@@ -6,6 +6,7 @@ use App\Http\Controllers\Search\SearchController;
 use App\Http\Controllers\MyCardsEdit\MyCardsEditCardController;
 use App\Http\Controllers\MyCardsEdit\MyCardsEditCollectionController;
 use App\Http\Controllers\MyCards\MyCardsController;
+use App\Http\Controllers\Api\ApiTokenController;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,9 +42,12 @@ Route::group(['middleware' => 'auth', 'prefix' => 'MyCardsEdit'], function(){
     Route::delete('/{collection}/destroy',[MyCardsEditCollectionController::class,'destroyCollection'])->name('MyCardsEdit.destroyCollection');
 });
 
-Route::get('/MyCards',[MyCardsController::class,'index'])->name('MyCards.index');
+Route::get('/MyCards',[MyCardsController::class,'index'])->middleware('auth')->name('MyCards.index');
 
 Route::get('/search',[SearchController::class,'index'])->name('search');
+
+Route::get('/Api',[ApiTokenController::class,'index'])->middleware('auth')->name('Api.index');
+Route::post('/Api',[ApiTokenController::class,'update'])->middleware('auth')->name('Api.update');
 
 Auth::routes();
 

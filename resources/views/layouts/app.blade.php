@@ -74,6 +74,9 @@
                                     <a class="dropdown-item" href="{{ route('MyCardsEdit.index') }}">
                                         {{ __('Редактировать мои карточки') }}
                                     </a>
+                                    <a class="dropdown-item" href="{{ route('Api.index') }}">
+                                        {{ __('Api') }}
+                                    </a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
