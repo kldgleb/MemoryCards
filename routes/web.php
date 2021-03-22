@@ -1,9 +1,11 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\IndexController;
-use App\Http\Controllers\SearchController;
-use App\Http\Controllers\MyCardsController;
+use App\Http\Controllers\Index\IndexController;
+use App\Http\Controllers\Search\SearchController;
+use App\Http\Controllers\MyCardsEdit\MyCardsEditCardController;
+use App\Http\Controllers\MyCardsEdit\MyCardsEditCollectionController;
+use App\Http\Controllers\MyCards\MyCardsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,22 +27,23 @@ Route::group(['middleware' => 'auth'], function(){
     Route::get('/{collection}/{card}',[IndexController::class,'show'])->name('index.show');
 });
 
-Route::group(['middleware' => 'auth', 'prefix' => 'MyCards'], function(){
-    Route::get('/{collection}/edit/{card}',[MyCardsController::class,'editCard'])->name('MyCards.editCard');
-    Route::get('/{collection}/create',[MyCardsController::class,'createCard'])->name('MyCards.createCard');
-    Route::post('/{collection}/create',[MyCardsController::class,'storeCard'])->name('MyCards.storeCard');
-    Route::delete('/{collection}/destroy/{card}',[MyCardsController::class,'destroyCard'])->name('MyCards.destroyCard');
-    Route::patch('/{collection}/update/{card}',[MyCardsController::class,'updateCard'])->name('MyCards.updateCard');
+Route::group(['middleware' => 'auth', 'prefix' => 'MyCardsEdit'], function(){
+    //card routes
+    Route::get('/{collection}/edit/{card}',[MyCardsEditCardController::class,'editCard'])->name('MyCardsEdit.editCard');
+    Route::get('/{collection}/create',[MyCardsEditCardController::class,'createCard'])->name('MyCardsEdit.createCard');
+    Route::post('/{collection}/create',[MyCardsEditCardController::class,'storeCard'])->name('MyCardsEdit.storeCard');
+    Route::delete('/{collection}/destroy/{card}',[MyCardsEditCardController::class,'destroyCard'])->name('MyCardsEdit.destroyCard');
+    Route::patch('/{collection}/update/{card}',[MyCardsEditCardController::class,'updateCard'])->name('MyCardsEdit.updateCard');
+    //collection routes
+    Route::get('/{collection}/edit',[MyCardsEditCollectionController::class,'editCollection'])->name('MyCardsEdit.editCollection');
+    Route::patch('/{collection}/update',[MyCardsEditCollectionController::class,'updateCollection'])->name('MyCardsEdit.updateCollection');
+    Route::get('/',[MyCardsEditCollectionController::class,'index'])->name('MyCardsEdit.index');
+    Route::get('/{collection}/destroy',[MyCardsEditCollectionController::class,'destroyCollection'])->name('MyCardsEdit.destroyCollection');
 });
 
-Route::resource('MyCards',MyCardsController::class)->except([
-    'create', 'store', 'show'
-]);;
+Route::get('/MyCards',[MyCardsController::class,'index'])->name('MyCards.index');
 
 Route::get('/search',[SearchController::class,'index'])->name('search');
 
 Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
 

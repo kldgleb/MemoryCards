@@ -6,6 +6,7 @@
 </h1>
 <h4 class="text-center text-muted">
     @if(!$collections->isEmpty())
+    Нажмите чтобы редактировать
     @else
     Вы еще не создали своих карточек 
     @endif
@@ -14,7 +15,7 @@
     <div class="row justify-content-center">
     @foreach ($collections as $collection)
         <div class="col-3 p-5 m-3 h4 bg-dark text-white text-center"> 
-            <a href="{{route('index.show',[$collection->collection_name,0])}}" >
+            <a href="{{route('MyCardsEdit.editCollection',[$collection->collection_name])}}" >
             {{$collection->collection_name}}
             </a>
         </div>
