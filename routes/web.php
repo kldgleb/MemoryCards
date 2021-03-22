@@ -1,11 +1,11 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\IndexController;
-use App\Http\Controllers\SearchController;
-use App\Http\Controllers\MyCardsEditCardController;
-use App\Http\Controllers\MyCardsEditCollectionController;
-use App\Http\Controllers\MyCardsController;
+use App\Http\Controllers\Index\IndexController;
+use App\Http\Controllers\Search\SearchController;
+use App\Http\Controllers\MyCardsEdit\MyCardsEditCardController;
+use App\Http\Controllers\MyCardsEdit\MyCardsEditCollectionController;
+use App\Http\Controllers\MyCards\MyCardsController;
 
 /*
 |--------------------------------------------------------------------------
