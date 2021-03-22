@@ -2,7 +2,7 @@
 
 @section('content')
 <h1 class="text-center">
-    <a href="{{route('MyCards.edit',[$collection->collection_name])}}">
+    <a href="{{route('MyCardsEdit.editCollection',[$collection->collection_name])}}">
         {{$collection->collection_name}}
     </a>
 </h1>
@@ -12,7 +12,7 @@
 <div class="container p-5">
     <div class="row justify-content-center">
         <div class="col-2">
-            <a class="arrow left svg-button" href="{{route('MyCards.index')}}">
+            <a class="arrow left svg-button" href="{{route('MyCardsEdit.index')}}">
                 <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                     viewBox="0 0 424.098 424.098" style="enable-background:new 0 0 424.098 424.098;" xml:space="preserve">
                 <g>
@@ -39,7 +39,7 @@
         </div>
         <div class="col-2">
             <a class="arrow right svg-button"
-                href="{{route('MyCards.editCard',[$collection->collection_name,0])}}">
+                href="{{route('MyCardsEdit.editCard',[$collection->collection_name,0])}}">
                 <svg version="1.0" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	                 width="100px" height="100px" viewBox="0 0 1200 1199.999" enable-background="new 0 0 1200 1199.999" xml:space="preserve">
                 <g>
@@ -58,7 +58,7 @@
     </div>
     <div class="row justify-content-center">
         <div class="col-8 text-center">
-            <a href="{{route('MyCards.createCard',$collection->collection_name)}}">    
+            <a href="{{route('MyCardsEdit.createCard',$collection->collection_name)}}">    
                 <div class="container p-5 mb-5 text-center border-add">
                     <h1>Добавить карточку</h1>
                     <img src="/img/add.png" width="10%" height="10%"/>

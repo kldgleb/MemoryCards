@@ -5,7 +5,7 @@
 <h1 class="text-center">
         {{$collection->collection_name}}
 </h1>
-<form action="{{route('storeCard',$collection->collection_name)}}" method="POST">
+<form action="{{route('MyCardsEdit.storeCard',$collection->collection_name)}}" method="POST">
         @csrf
         <div class="container p-5">
         
