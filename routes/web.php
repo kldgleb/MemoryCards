@@ -38,7 +38,7 @@ Route::group(['middleware' => 'auth', 'prefix' => 'MyCardsEdit'], function(){
     Route::get('/{collection}/edit',[MyCardsEditCollectionController::class,'editCollection'])->name('MyCardsEdit.editCollection');
     Route::patch('/{collection}/update',[MyCardsEditCollectionController::class,'updateCollection'])->name('MyCardsEdit.updateCollection');
     Route::get('/',[MyCardsEditCollectionController::class,'index'])->name('MyCardsEdit.index');
-    Route::get('/{collection}/destroy',[MyCardsEditCollectionController::class,'destroyCollection'])->name('MyCardsEdit.destroyCollection');
+    Route::delete('/{collection}/destroy',[MyCardsEditCollectionController::class,'destroyCollection'])->name('MyCardsEdit.destroyCollection');
 });
 
 Route::get('/MyCards',[MyCardsController::class,'index'])->name('MyCards.index');
