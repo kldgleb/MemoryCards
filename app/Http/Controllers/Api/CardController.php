@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Api;
 
-use Illuminate\Http\Request;
+use App\Http\Requests\CardRequest;
 use App\Http\Controllers\Controller;
+use App\Models\Collection;
+use App\Models\Card;
 
 class CardController extends Controller
 {
@@ -12,19 +14,13 @@ class CardController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($collection_name)
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        $collection = Collection::where('collection_name', $collection_name)->first();
+        if($collection){
+            return response()->json($collection->cards,200);
+        }
+        return response('Not Found',404);
     }
 
     /**
@@ -33,9 +29,18 @@ class CardController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CardRequest $request,$collection_name)
     {
-        //
+        $collection = Collection::where('collection_name', $collection_name)->first();
+        if($collection){
+            Card::create([
+                'collection_id' => $collection->id,
+                'header' => $request->header,
+                'text' => $request->text
+            ]);
+            return response()->json('Created',201);
+        }
+        return response('Not Found',404);
     }
 
     /**
@@ -44,20 +49,17 @@ class CardController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($collection_name,$card_id)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+        $collection = Collection::where('collection_name', $collection_name)
+                                    ->where('user_id',auth()->user()->id)->first();
+        if($collection){                            
+            $card = $collection->cards->get($card_id);
+            if($card){
+                return response()->json($card,200);
+            }
+        }
+        return response('Not Found',404);
     }
 
     /**
@@ -67,9 +69,18 @@ class CardController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(CardRequest $request, $collection_name, $card_id)
     {
-        //
+        $collection = Collection::where('collection_name', $collection_name)
+                                    ->where('user_id',auth()->user()->id)->first();
+        if($collection){                            
+            $card = $collection->cards->get($card_id);
+            if($card){
+                $card->update($request->validated());
+                return response()->json('Updated',200);
+            }
+        }
+        return response('Not Found',404);
     }
 
     /**
@@ -78,8 +89,17 @@ class CardController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($collection_name, $card_id)
     {
-        //
+        $collection = Collection::where('collection_name', $collection_name)
+                                    ->where('user_id',auth()->user()->id)->first();
+        if($collection){                            
+            $card = $collection->cards->get($card_id);
+            if($card){
+                $card->delete();
+                return response()->json('Deleted',200);
+            }
+        }
+        return response('Not Found',404);
     }
 }
