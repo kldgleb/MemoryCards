@@ -22,7 +22,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::group(['middleware' => 'auth:api', 'prefix' => '{collection}'], function(){
+Route::group(['middleware' => 'auth:api', 'prefix' => '/{collection}'], function(){
     Route::resource('card', CardController::class)->except([
         'create', 'edit'
     ]);

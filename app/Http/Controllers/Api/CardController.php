@@ -12,9 +12,9 @@ class CardController extends Controller
 
     /**
      * @OA\Get(
-     *      path="{collection_name}/Card",
+     *      path="/{collection_name}/card",
      *      operationId="getCardsList",
-     *      tags={"Card"},
+     *      tags={"Cards"},
      *      summary="Get list of cards",
      *      description="Returns list of cards",
      *      security={
@@ -32,7 +32,7 @@ class CardController extends Controller
      *      @OA\Response(
      *          response=200,
      *          description="Successful",
-     *          @OA\JsonContent(ref="#/components/schemas/Collection")
+     *          @OA\JsonContent(ref="#/components/schemas/Card")
      *       ),
      *      @OA\Response(
      *          response=401,
@@ -60,6 +60,44 @@ class CardController extends Controller
     }
 
     /**
+     * @OA\Post(
+     *      path="/{collection_name}/card",
+     *      operationId="Store a newly created card",
+     *      tags={"Cards"},
+     *      summary="Store new card",
+     *      description="Return status code",
+     *      security={
+     *          {"api_token": {}}
+     *      },
+     *      @OA\Parameter(
+     *          name="collection_name",
+     *          description="Colelction name",
+     *          required=true,
+     *          in="path",
+     *          @OA\Schema(
+     *              type="string"
+     *          )
+     *      ),
+     *      @OA\RequestBody(
+     *          required=true,
+     *          @OA\JsonContent(ref="#/components/schemas/CardRequest")
+     *      ),
+     *      @OA\Response(
+     *          response=201,
+     *          description="Created"
+     *       ),
+     *      @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated",
+     *      ),
+     *      @OA\Response(
+     *          response=404,
+     *          description="Not Found"
+     *      )
+     *     )
+     */
+
+    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -78,6 +116,50 @@ class CardController extends Controller
         }
         return response('Not Found',404);
     }
+
+    /**
+     * @OA\Get(
+     *      path="/{collection_name}/card/{card}",
+     *      operationId="getCardById",
+     *      tags={"Cards"},
+     *      summary="Get card",
+     *      description="Returns card",
+     *      security={
+     *          {"api_token": {}}
+     *      },
+     *      @OA\Parameter(
+     *          name="collection_name",
+     *          description="Colelction name",
+     *          required=true,
+     *          in="path",
+     *          @OA\Schema(
+     *              type="string"
+     *          )
+     *      ),
+     *      @OA\Parameter(
+     *          name="card",
+     *          description="Numeric id in collection start with 0 not db id",
+     *          required=true,
+     *          in="path",
+     *          @OA\Schema(
+     *              type="string"
+     *          )
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successful",
+     *          @OA\JsonContent(ref="#/components/schemas/Card")
+     *       ),
+     *      @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated",
+     *      ),
+     *      @OA\Response(
+     *          response=404,
+     *          description="Not Found"
+     *      )
+     *     )
+     */
 
     /**
      * Display the specified resource.
@@ -99,6 +181,53 @@ class CardController extends Controller
     }
 
     /**
+     * @OA\Patch(
+     *      path="/{collection_name}/card/{card}",
+     *      operationId="Update card",
+     *      tags={"Cards"},
+     *      summary="Update card",
+     *      description="Return status code",
+     *      security={
+     *          {"api_token": {}}
+     *      },
+     *      @OA\Parameter(
+     *          name="collection_name",
+     *          description="Colelction name",
+     *          required=true,
+     *          in="path",
+     *          @OA\Schema(
+     *              type="string"
+     *          )
+     *      ),
+     *      @OA\Parameter(
+     *          name="card",
+     *          description="Numeric id in collection start with 0 not db id",
+     *          required=true,
+     *          in="path",
+     *          @OA\Schema(
+     *              type="string"
+     *          )
+     *      ),
+     *      @OA\RequestBody(
+     *          required=true,
+     *          @OA\JsonContent(ref="#/components/schemas/CardRequest")
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Updated"
+     *       ),
+     *      @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated",
+     *      ),
+     *      @OA\Response(
+     *          response=404,
+     *          description="Not Found"
+     *      )
+     *     )
+     */
+
+    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -118,6 +247,49 @@ class CardController extends Controller
         }
         return response('Not Found',404);
     }
+
+    /**
+     * @OA\Delete(
+     *      path="/{collection_name}/card/{card}",
+     *      operationId="Delete card",
+     *      tags={"Cards"},
+     *      summary="Delete card",
+     *      description="Return status code",
+     *      security={
+     *          {"api_token": {}}
+     *      },
+     *      @OA\Parameter(
+     *          name="collection_name",
+     *          description="Colelction name",
+     *          required=true,
+     *          in="path",
+     *          @OA\Schema(
+     *              type="string"
+     *          )
+     *      ),
+     *      @OA\Parameter(
+     *          name="card",
+     *          description="Numeric id in collection start with 0 not db id",
+     *          required=true,
+     *          in="path",
+     *          @OA\Schema(
+     *              type="string"
+     *          )
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Deleted"
+     *       ),
+     *      @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated",
+     *      ),
+     *      @OA\Response(
+     *          response=404,
+     *          description="Not Found"
+     *      )
+     *     )
+     */
 
     /**
      * Remove the specified resource from storage.

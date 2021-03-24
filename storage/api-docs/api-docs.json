@@ -15,10 +15,10 @@
         }
     ],
     "paths": {
-        "{collection_name}/Card": {
+        "/{collection_name}/card": {
             "get": {
                 "tags": [
-                    "Card"
+                    "Cards"
                 ],
                 "summary": "Get list of cards",
                 "description": "Returns list of cards",
@@ -40,10 +40,206 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Collection"
+                                    "$ref": "#/components/schemas/Card"
                                 }
                             }
                         }
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "api_token": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Cards"
+                ],
+                "summary": "Store new card",
+                "description": "Return status code",
+                "operationId": "Store a newly created card",
+                "parameters": [
+                    {
+                        "name": "collection_name",
+                        "in": "path",
+                        "description": "Colelction name",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CardRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "api_token": []
+                    }
+                ]
+            }
+        },
+        "/{collection_name}/card/{card}": {
+            "get": {
+                "tags": [
+                    "Cards"
+                ],
+                "summary": "Get card",
+                "description": "Returns card",
+                "operationId": "getCardById",
+                "parameters": [
+                    {
+                        "name": "collection_name",
+                        "in": "path",
+                        "description": "Colelction name",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "card",
+                        "in": "path",
+                        "description": "Numeric id in collection start with 0 not db id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Card"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "api_token": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Cards"
+                ],
+                "summary": "Delete card",
+                "description": "Return status code",
+                "operationId": "Delete card",
+                "parameters": [
+                    {
+                        "name": "collection_name",
+                        "in": "path",
+                        "description": "Colelction name",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "card",
+                        "in": "path",
+                        "description": "Numeric id in collection start with 0 not db id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Deleted"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "api_token": []
+                    }
+                ]
+            },
+            "patch": {
+                "tags": [
+                    "Cards"
+                ],
+                "summary": "Update card",
+                "description": "Return status code",
+                "operationId": "Update card",
+                "parameters": [
+                    {
+                        "name": "collection_name",
+                        "in": "path",
+                        "description": "Colelction name",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "card",
+                        "in": "path",
+                        "description": "Numeric id in collection start with 0 not db id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CardRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Updated"
                     },
                     "401": {
                         "description": "Unauthenticated"
@@ -250,6 +446,29 @@
     },
     "components": {
         "schemas": {
+            "CardRequest": {
+                "title": "CardRequest",
+                "description": "Store Card request body data",
+                "required": [
+                    "text",
+                    "header"
+                ],
+                "properties": {
+                    "header": {
+                        "title": "header",
+                        "description": "header of the collection",
+                        "type": "string",
+                        "example": "Example Card header"
+                    },
+                    "text": {
+                        "title": "text",
+                        "description": "text of the card",
+                        "type": "string",
+                        "example": "Example Card text"
+                    }
+                },
+                "type": "object"
+            },
             "CollectionRequest": {
                 "title": "CollectionRequest",
                 "description": "Store Collection request body data",
@@ -274,7 +493,7 @@
             },
             "Card": {
                 "title": "Card",
-                "description": "Card model",
+                "description": "card model",
                 "properties": {
                     "id": {
                         "title": "id",
@@ -284,7 +503,7 @@
                     },
                     "collection_id": {
                         "title": "collection_id",
-                        "description": "Card belongs to collection",
+                        "description": "Card belong to this collection",
                         "type": "integer",
                         "example": "1"
                     },
@@ -292,13 +511,13 @@
                         "title": "header",
                         "description": "Header of the card",
                         "type": "string",
-                        "example": "Example Header"
+                        "example": "Example header"
                     },
                     "text": {
                         "title": "text",
-                        "description": "text of the card",
+                        "description": "Text of the card",
                         "type": "string",
-                        "example": "Example card text"
+                        "example": "Not required"
                     },
                     "created_at": {
                         "title": "created_at",
