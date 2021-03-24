@@ -9,6 +9,42 @@ use App\Models\Card;
 
 class CardController extends Controller
 {
+
+    /**
+     * @OA\Get(
+     *      path="{collection_name}/Card",
+     *      operationId="getCardsList",
+     *      tags={"Card"},
+     *      summary="Get list of cards",
+     *      description="Returns list of cards",
+     *      security={
+     *          {"api_token": {}}
+     *      },
+     *      @OA\Parameter(
+     *          name="collection_name",
+     *          description="Colelction name",
+     *          required=true,
+     *          in="path",
+     *          @OA\Schema(
+     *              type="string"
+     *          )
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successful",
+     *          @OA\JsonContent(ref="#/components/schemas/Collection")
+     *       ),
+     *      @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated",
+     *      ),
+     *      @OA\Response(
+     *          response=404,
+     *          description="Not Found"
+     *      )
+     *     )
+     */
+
     /**
      * Display a listing of the resource.
      *

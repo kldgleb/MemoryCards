@@ -4,8 +4,38 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+/**
+ * @OA\Schema(
+ *      title="CollectionRequest",
+ *      description="Store Collection request body data",
+ *      type="object",
+ *      required={"collection_name"}
+ * )
+ */
+
 class CollectionRequest extends FormRequest
 {
+    /**
+     * @OA\Property(
+     *      title="collection_name",
+     *      description="Name of the collection",
+     *      example="Example Collection"
+     * )
+     *
+     * @var string
+     */
+    public $collection_name;
+    /**
+     * @OA\Property(
+     *      title="collection_description",
+     *      description="Description of the collection",
+     *      example="Example Collection description"
+     * )
+     *
+     * @var string
+     */
+    public $collection_description;
+
     /**
      * Determine if the user is authorized to make this request.
      *

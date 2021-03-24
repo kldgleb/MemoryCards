@@ -1,0 +1,389 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "MemoryCards API Documentation",
+        "description": "",
+        "contact": {
+            "email": "gleb.koldunov@gmail.com"
+        },
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://127.0.0.1:8000/api/",
+            "description": "Demo API Server"
+        }
+    ],
+    "paths": {
+        "{collection_name}/Card": {
+            "get": {
+                "tags": [
+                    "Card"
+                ],
+                "summary": "Get list of cards",
+                "description": "Returns list of cards",
+                "operationId": "getCardsList",
+                "parameters": [
+                    {
+                        "name": "collection_name",
+                        "in": "path",
+                        "description": "Colelction name",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Collection"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "api_token": []
+                    }
+                ]
+            }
+        },
+        "/collection": {
+            "get": {
+                "tags": [
+                    "Collection"
+                ],
+                "summary": "Get list of collections",
+                "description": "Returns list of colections",
+                "operationId": "getCollectionsList",
+                "responses": {
+                    "200": {
+                        "description": "Successful",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Collection"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "api_token": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Collection"
+                ],
+                "summary": "Store new collection",
+                "description": "Return status code",
+                "operationId": "Store a newly created collection",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CollectionRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    }
+                },
+                "security": [
+                    {
+                        "api_token": []
+                    }
+                ]
+            }
+        },
+        "/collection/{collection_name}": {
+            "get": {
+                "tags": [
+                    "Collection"
+                ],
+                "summary": "Get collection",
+                "description": "Returns colection",
+                "operationId": "getCollectionByName",
+                "parameters": [
+                    {
+                        "name": "collection_name",
+                        "in": "path",
+                        "description": "Colelction name",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Collection"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "api_token": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Collection"
+                ],
+                "summary": "Delete collection",
+                "description": "Return status code",
+                "operationId": "Delete collection",
+                "parameters": [
+                    {
+                        "name": "collection_name",
+                        "in": "path",
+                        "description": "Colelction name",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Deleted"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "api_token": []
+                    }
+                ]
+            },
+            "patch": {
+                "tags": [
+                    "Collection"
+                ],
+                "summary": "Update collection",
+                "description": "Return status code",
+                "operationId": "Update collection",
+                "parameters": [
+                    {
+                        "name": "collection_name",
+                        "in": "path",
+                        "description": "Colelction name",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CollectionRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Updated"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "api_token": []
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "CollectionRequest": {
+                "title": "CollectionRequest",
+                "description": "Store Collection request body data",
+                "required": [
+                    "collection_name"
+                ],
+                "properties": {
+                    "collection_name": {
+                        "title": "collection_name",
+                        "description": "Name of the collection",
+                        "type": "string",
+                        "example": "Example Collection"
+                    },
+                    "collection_description": {
+                        "title": "collection_description",
+                        "description": "Description of the collection",
+                        "type": "string",
+                        "example": "Example Collection description"
+                    }
+                },
+                "type": "object"
+            },
+            "Card": {
+                "title": "Card",
+                "description": "Card model",
+                "properties": {
+                    "id": {
+                        "title": "id",
+                        "description": "id",
+                        "type": "integer",
+                        "example": "1"
+                    },
+                    "collection_id": {
+                        "title": "collection_id",
+                        "description": "Card belongs to collection",
+                        "type": "integer",
+                        "example": "1"
+                    },
+                    "header": {
+                        "title": "header",
+                        "description": "Header of the card",
+                        "type": "string",
+                        "example": "Example Header"
+                    },
+                    "text": {
+                        "title": "text",
+                        "description": "text of the card",
+                        "type": "string",
+                        "example": "Example card text"
+                    },
+                    "created_at": {
+                        "title": "created_at",
+                        "description": "creation time",
+                        "type": "string",
+                        "example": "2021-03-23 10:31:54"
+                    },
+                    "updated_at": {
+                        "title": "updated_at",
+                        "description": "update time",
+                        "type": "string",
+                        "example": "2021-03-24 10:31:54"
+                    }
+                },
+                "type": "object",
+                "xml": {
+                    "name": "Card"
+                }
+            },
+            "Collection": {
+                "title": "Collection",
+                "description": "Collection model",
+                "properties": {
+                    "id": {
+                        "title": "id",
+                        "description": "id",
+                        "type": "integer",
+                        "example": "1"
+                    },
+                    "user_id": {
+                        "title": "user_id",
+                        "description": "User who create this collection",
+                        "type": "integer",
+                        "example": "1"
+                    },
+                    "collection_name": {
+                        "title": "collection_name",
+                        "description": "Name of the colelction",
+                        "type": "string",
+                        "example": "Example Name"
+                    },
+                    "collection_description": {
+                        "title": "collection_description",
+                        "description": "Description of the colelction",
+                        "type": "string",
+                        "example": "Not required"
+                    },
+                    "created_at": {
+                        "title": "created_at",
+                        "description": "creation time",
+                        "type": "string",
+                        "example": "2021-03-23 10:31:54"
+                    },
+                    "updated_at": {
+                        "title": "updated_at",
+                        "description": "update time",
+                        "type": "string",
+                        "example": "2021-03-24 10:31:54"
+                    }
+                },
+                "type": "object",
+                "xml": {
+                    "name": "Collection"
+                }
+            }
+        },
+        "securitySchemes": {
+            "api_token": {
+                "type": "apiKey",
+                "name": "api_token",
+                "in": "query"
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Collection",
+            "description": "ways to interact with collection objects"
+        },
+        {
+            "name": "Cards",
+            "description": "collection has many cards and this how to interact with card objects"
+        }
+    ],
+    "security": [
+        []
+    ]
+}
