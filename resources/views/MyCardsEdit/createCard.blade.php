@@ -5,7 +5,7 @@
 <h1 class="text-center">
         {{$collection->collection_name}}
 </h1>
-<form action="{{route('MyCardsEdit.storeCard',$collection->collection_name)}}" method="POST">
+<form action="{{route('MyCardsEdit.storeCard',$collection->collection_path)}}" method="POST">
         @csrf
         <div class="container p-5">
         
@@ -37,7 +37,7 @@
                 <br>
             </div>
             <div class="col-2">
-                    <a href="{{route('MyCardsEdit.editCard',[$collection->collection_name,0])}}" class="btn btn-outline-dark p-2">
+                    <a href="{{route('MyCardsEdit.editCard',[$collection->collection_path,0])}}" class="btn btn-outline-dark p-2">
                         <span>Вернуться к редактированию коллекции</span>
                     </a>
             </div>

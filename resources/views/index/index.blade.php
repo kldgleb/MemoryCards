@@ -15,12 +15,18 @@
         <div class="row justify-content-center">
     @foreach ($collections as $collection)
             <div class="col-3 p-5 m-2 h4 bg-dark text-white text-center"> 
-                <a href="{{route('index.show',[$collection->collection_name,0])}}" id="showDescription">
+                <a href="{{route('index.show',[$collection->collection_path,0])}}" id="showDescription">
                     {{$collection->collection_name}}
                 </a>
-                <a href="{{route('index.show',[$collection->collection_name,0])}}" id="target" style="display: none">
-                    {{$collection->collection_description}}
+                <a href="{{route('index.show',[$collection->collection_path,0])}}" id="target" style="display: none">
+                    @if(!$collection->collection_description)
+                        
+                        {{$collection->collection_name}}
+                    @else
+                        {{$collection->collection_description}}
+                    @endif
                 </a>
+                
             </div>                 
     @endforeach
         </div>

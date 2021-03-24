@@ -3,7 +3,7 @@
 @section('content')
 
     <h1 class="text-center">
-        <a href="{{route('index.show',[$collection->collection_name,0])}}">
+        <a href="{{route('index.show',[$collection->collection_path,0])}}">
             {{$collection->collection_name}}
         </a>
     </h1>
@@ -15,7 +15,7 @@
             <div class="row justify-content-center">
                 <div class="col-2">
                     <a class="arrow left svg-button"
-                            href="{{route('index.show',[$collection->collection_name,$card_id-1])}}">
+                            href="{{route('index.show',[$collection->collection_path,$card_id-1])}}">
                         <svg width="60px" height="80px" viewBox="0 0 50 80" xml:space="preserve">
                           <polyline fill="none" stroke="#000000" stroke-width="1" stroke-linecap="round" 
                           stroke-linejoin="round" points="
@@ -41,7 +41,7 @@
                 </div>
                 <div class="col-2">
                     <a class="arrow right svg-button"
-                        href="{{route('index.show',[$collection->collection_name,$card_id+1])}}">
+                        href="{{route('index.show',[$collection->collection_path,$card_id+1])}}">
                         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="60px" height="80px" viewBox="0 0 50 80" xml:space="preserve">
                           <polyline fill="none" stroke="#000000" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" points="
                           0.375,0.375 45.63,38.087 0.375,75.8 "/>
@@ -54,7 +54,7 @@
             <div class="row justify-content-center">
                 @foreach ($collection->cards as $card)
                     <div class="col-3 bg-dark m-2 text-center text-white">
-                        <a class="d-block p-5" href="{{route('index.show',[$collection->collection_name,$loop->index])}}">
+                        <a class="d-block p-5" href="{{route('index.show',[$collection->collection_path,$loop->index])}}">
                         {{$card->header}}
                         </a>
                     </div>

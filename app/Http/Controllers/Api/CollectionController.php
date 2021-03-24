@@ -84,6 +84,7 @@ class CollectionController extends Controller
         Collection::create([
             'user_id'=>auth()->user()->id,
             'collection_name'=>$request->collection_name,
+            'collection_path'=>$this->toCamelCase($request->collection_name),
             'collection_description'=>$request->collection_description,
         ]);
         return response('Created',201);
@@ -91,7 +92,7 @@ class CollectionController extends Controller
 
     /**
      * @OA\Get(
-     *      path="/collection/{collection_name}",
+     *      path="/collection/{collection_path}",
      *      operationId="getCollectionByName",
      *      tags={"Collection"},
      *      summary="Get collection",
@@ -100,7 +101,7 @@ class CollectionController extends Controller
      *          {"api_token": {}}
      *      },
      *      @OA\Parameter(
-     *          name="collection_name",
+     *          name="collection_path",
      *          description="Colelction name",
      *          required=true,
      *          in="path",
@@ -127,12 +128,12 @@ class CollectionController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  string  $collection_name
+     * @param  string  $collection_path
      * @return \Illuminate\Http\Response
      */
-    public function show($collection_name)
+    public function show($collection_path)
     {
-        $collection = Collection::where('collection_name', $collection_name)
+        $collection = Collection::where('collection_path', $collection_path)
                                     ->where('user_id',auth()->user()->id)->first();
         if($collection){
             return response()->json($collection,200);
@@ -142,7 +143,7 @@ class CollectionController extends Controller
 
     /**
      * @OA\Patch(
-     *      path="/collection/{collection_name}",
+     *      path="/collection/{collection_path}",
      *      operationId="Update collection",
      *      tags={"Collection"},
      *      summary="Update collection",
@@ -151,7 +152,7 @@ class CollectionController extends Controller
      *          {"api_token": {}}
      *      },
      *      @OA\Parameter(
-     *          name="collection_name",
+     *          name="collection_path",
      *          description="Colelction name",
      *          required=true,
      *          in="path",
@@ -182,12 +183,12 @@ class CollectionController extends Controller
      * Update the specified resource in storage.
      *
      * @param  App\Http\Requests\CollectionRequest  $request
-     * @param  string  $collection_name
+     * @param  string  $collection_path
      * @return \Illuminate\Http\Response
      */
-    public function update(CollectionRequest $request, $collection_name)
+    public function update(CollectionRequest $request, $collection_path)
     {
-        $collection = Collection::where('collection_name', $collection_name)
+        $collection = Collection::where('collection_path', $collection_path)
                                     ->where('user_id',auth()->user()->id)->first();
         if($collection){
             $collection->update($request->validated());
@@ -198,7 +199,7 @@ class CollectionController extends Controller
 
     /**
      * @OA\Delete(
-     *      path="/collection/{collection_name}",
+     *      path="/collection/{collection_path}",
      *      operationId="Delete collection",
      *      tags={"Collection"},
      *      summary="Delete collection",
@@ -207,7 +208,7 @@ class CollectionController extends Controller
      *          {"api_token": {}}
      *      },
      *      @OA\Parameter(
-     *          name="collection_name",
+     *          name="collection_path",
      *          description="Colelction name",
      *          required=true,
      *          in="path",
@@ -233,12 +234,12 @@ class CollectionController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  string  $collection_name
+     * @param  string  $collection_path
      * @return \Illuminate\Http\Response
      */
-    public function destroy($collection_name)
+    public function destroy($collection_path)
     {
-        $collection = Collection::where('collection_name', $collection_name)
+        $collection = Collection::where('collection_path', $collection_path)
                                     ->where('user_id',auth()->user()->id)->first();
         if($collection){
             $collection->delete();

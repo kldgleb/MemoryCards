@@ -14,9 +14,9 @@ class MyCardsEditCollectionController extends Controller
         return view('MyCardsEdit.index',compact('collections'));
     }
 
-    public function editCollection($collection_name)
+    public function editCollection($collection_path)
     {
-        $collection = Collection::where('collection_name', $collection_name)
+        $collection = Collection::where('collection_path', $collection_path)
                                     ->where('user_id',auth()->user()->id)->first();
         
         if($collection){
@@ -26,9 +26,9 @@ class MyCardsEditCollectionController extends Controller
         }else abort('404');
     }
 
-    public function updateCollection(CollectionRequest $request, $collection_name)
+    public function updateCollection(CollectionRequest $request, $collection_path)
     {
-        $collection = Collection::where('collection_name', $collection_name)
+        $collection = Collection::where('collection_path', $collection_path)
                                     ->where('user_id',auth()->user()->id)->first();
         if($collection){
             $collection->update($request->validated());
@@ -37,9 +37,9 @@ class MyCardsEditCollectionController extends Controller
         
     }
 
-    public function destroyCollection($collection_name)
+    public function destroyCollection($collection_path)
     {
-        $collection = Collection::where('collection_name', $collection_name)
+        $collection = Collection::where('collection_path', $collection_path)
                                     ->where('user_id',auth()->user()->id)->first();
         $cards = $collection->cards;
         foreach($cards as $card){

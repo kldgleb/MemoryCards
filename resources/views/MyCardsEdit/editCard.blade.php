@@ -2,7 +2,7 @@
 
 @section('content')
 <h1 class="text-center">
-    <a href="{{route('MyCardsEdit.editCollection',[$collection->collection_name])}}">
+    <a href="{{route('MyCardsEdit.editCollection',[$collection->collection_path])}}">
         {{$collection->collection_name}}
     </a>
 </h1>
@@ -13,7 +13,7 @@
             <div class="row justify-content-center">
                 <div class="col-2">
                     <a class="arrow left svg-button"
-                        href="{{route('MyCardsEdit.editCard',[$collection->collection_name,$card_id-1])}}">
+                        href="{{route('MyCardsEdit.editCard',[$collection->collection_path,$card_id-1])}}">
                         <svg width="60px" height="80px" viewBox="0 0 50 80" xml:space="preserve">
                           <polyline fill="none" stroke="#000000" stroke-width="1" stroke-linecap="round" 
                           stroke-linejoin="round" points="
@@ -25,7 +25,7 @@
                     <p class="text-white h1 m-3">
                         <label for="header">Заголовок карточки: </label>
                     </p>
-                    <form action="{{route('MyCardsEdit.updateCard',[$collection->collection_name, $card_id])}}" method="POST">
+                    <form action="{{route('MyCardsEdit.updateCard',[$collection->collection_path, $card_id])}}" method="POST">
                         @csrf
                         @method('PATCH')
                     <input class="m-3 text-center" id="header" name="header" placeholder="header" value="{{$card->header}}"/>
@@ -48,7 +48,7 @@
                 </div>
 </form>   
                 <div class="col-2">
-                    <form action="{{route('MyCardsEdit.destroyCard',[$collection->collection_name,$card_id])}}" method="POST">
+                    <form action="{{route('MyCardsEdit.destroyCard',[$collection->collection_path,$card_id])}}" method="POST">
                         @csrf
                         @method('DELETE')   
                             <button class="btn btn-outline-danger p-2">
@@ -56,7 +56,7 @@
                             </button>
                         </form>
                     <a class="arrow right svg-button"
-                        href="{{route('MyCardsEdit.editCard',[$collection->collection_name,$card_id+1])}}">
+                        href="{{route('MyCardsEdit.editCard',[$collection->collection_path,$card_id+1])}}">
                         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="60px" height="80px" viewBox="0 0 50 80" xml:space="preserve">
                           <polyline fill="none" stroke="#000000" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" points="
                           0.375,0.375 45.63,38.087 0.375,75.8 "/>
@@ -67,7 +67,7 @@
             <br>
             <div class="row justify-content-center">
                 <div class="col-8 text-center">
-                    <a href="{{route('MyCardsEdit.createCard',$collection->collection_name)}}">    
+                    <a href="{{route('MyCardsEdit.createCard',$collection->collection_path)}}">    
                         <div class="container p-5 mb-5 text-center border-add">
                             <h1>Добавить карточку</h1>
                             <img src="/img/add.png" width="10%" height="10%"/>
@@ -79,7 +79,7 @@
                 <div class="row justify-content-center">
                     @foreach ($collection->cards as $card)
                         <div class="col-3 bg-dark m-2 text-center text-white">
-                            <a class="d-block p-5" href="{{route('index.show',[$collection->collection_name,$loop->index])}}">
+                            <a class="d-block p-5" href="{{route('index.show',[$collection->collection_path,$loop->index])}}">
                             {{$card->header}}
                             </a>
                         </div>

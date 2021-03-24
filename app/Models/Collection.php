@@ -9,10 +9,10 @@ class Collection extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['user_id','collection_name','collection_description'];
+    protected $fillable = ['user_id','collection_path','collection_name','collection_description'];
 
     public function getRouteKeyName(){
-        return 'collection_name';
+        return 'collection_path';
     }
 
     public function cards(){
