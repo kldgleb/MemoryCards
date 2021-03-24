@@ -17,6 +17,7 @@ class CreateCollectionsTable extends Migration
             $table->id();
             $table->bigInteger('user_id');
             $table->string('collection_name')->unique();
+            $table->string('collection_path')->unique();
             $table->string('collection_description')->nullable();
             $table->timestamps();
         });

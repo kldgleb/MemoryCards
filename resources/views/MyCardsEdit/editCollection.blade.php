@@ -5,7 +5,7 @@
         <div class="container p-5">
             <div class="row justify-content-center">
                 <div class="col-2">
-                    <form action="{{route('MyCardsEdit.destroyCollection',$collection->collection_name)}}">
+                    <form action="{{route('MyCardsEdit.destroyCollection',$collection->collection_path)}}">
                     @csrf
                     @method('DELETE')   
                         <button class="btn btn-outline-danger p-2">
@@ -14,7 +14,7 @@
                     </form>
                 </div>
                 <div class="col-8 text-center h3"> 
-                    <form action="{{route('MyCardsEdit.updateCollection',$collection->collection_name)}}" method="POST">
+                    <form action="{{route('MyCardsEdit.updateCollection',$collection->collection_path)}}" method="POST">
                         @csrf
                         @method('PATCH')
                     <h1 class="text-center m-5">
@@ -29,7 +29,7 @@
                         placeholder="description">{{$collection->collection_description}}</textarea>
                 </div>
                 <div class="col-2">
-                    <a href="{{route('MyCardsEdit.editCard',[$collection->collection_name,0])}}" class="btn btn-outline-dark p-2">
+                    <a href="{{route('MyCardsEdit.editCard',[$collection->collection_path,0])}}" class="btn btn-outline-dark p-2">
                         <span>Перейти к редактированию карточек</span>
                     </a>
                 </div>

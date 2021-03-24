@@ -12,7 +12,7 @@ class CardController extends Controller
 
     /**
      * @OA\Get(
-     *      path="/{collection_name}/card",
+     *      path="/{collection_path}/card",
      *      operationId="getCardsList",
      *      tags={"Cards"},
      *      summary="Get list of cards",
@@ -21,7 +21,7 @@ class CardController extends Controller
      *          {"api_token": {}}
      *      },
      *      @OA\Parameter(
-     *          name="collection_name",
+     *          name="collection_path",
      *          description="Colelction name",
      *          required=true,
      *          in="path",
@@ -50,9 +50,9 @@ class CardController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($collection_name)
+    public function index($collection_path)
     {
-        $collection = Collection::where('collection_name', $collection_name)->first();
+        $collection = Collection::where('collection_path', $collection_path)->first();
         if($collection){
             return response()->json($collection->cards,200);
         }
@@ -61,7 +61,7 @@ class CardController extends Controller
 
     /**
      * @OA\Post(
-     *      path="/{collection_name}/card",
+     *      path="/{collection_path}/card",
      *      operationId="Store a newly created card",
      *      tags={"Cards"},
      *      summary="Store new card",
@@ -70,7 +70,7 @@ class CardController extends Controller
      *          {"api_token": {}}
      *      },
      *      @OA\Parameter(
-     *          name="collection_name",
+     *          name="collection_path",
      *          description="Colelction name",
      *          required=true,
      *          in="path",
@@ -103,9 +103,9 @@ class CardController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CardRequest $request,$collection_name)
+    public function store(CardRequest $request,$collection_path)
     {
-        $collection = Collection::where('collection_name', $collection_name)->first();
+        $collection = Collection::where('collection_path', $collection_path)->first();
         if($collection){
             Card::create([
                 'collection_id' => $collection->id,
@@ -119,7 +119,7 @@ class CardController extends Controller
 
     /**
      * @OA\Get(
-     *      path="/{collection_name}/card/{card}",
+     *      path="/{collection_path}/card/{card}",
      *      operationId="getCardById",
      *      tags={"Cards"},
      *      summary="Get card",
@@ -128,7 +128,7 @@ class CardController extends Controller
      *          {"api_token": {}}
      *      },
      *      @OA\Parameter(
-     *          name="collection_name",
+     *          name="collection_path",
      *          description="Colelction name",
      *          required=true,
      *          in="path",
@@ -167,9 +167,9 @@ class CardController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($collection_name,$card_id)
+    public function show($collection_path,$card_id)
     {
-        $collection = Collection::where('collection_name', $collection_name)
+        $collection = Collection::where('collection_path', $collection_path)
                                     ->where('user_id',auth()->user()->id)->first();
         if($collection){                            
             $card = $collection->cards->get($card_id);
@@ -182,7 +182,7 @@ class CardController extends Controller
 
     /**
      * @OA\Patch(
-     *      path="/{collection_name}/card/{card}",
+     *      path="/{collection_path}/card/{card}",
      *      operationId="Update card",
      *      tags={"Cards"},
      *      summary="Update card",
@@ -191,7 +191,7 @@ class CardController extends Controller
      *          {"api_token": {}}
      *      },
      *      @OA\Parameter(
-     *          name="collection_name",
+     *          name="collection_path",
      *          description="Colelction name",
      *          required=true,
      *          in="path",
@@ -234,9 +234,9 @@ class CardController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(CardRequest $request, $collection_name, $card_id)
+    public function update(CardRequest $request, $collection_path, $card_id)
     {
-        $collection = Collection::where('collection_name', $collection_name)
+        $collection = Collection::where('collection_path', $collection_path)
                                     ->where('user_id',auth()->user()->id)->first();
         if($collection){                            
             $card = $collection->cards->get($card_id);
@@ -250,7 +250,7 @@ class CardController extends Controller
 
     /**
      * @OA\Delete(
-     *      path="/{collection_name}/card/{card}",
+     *      path="/{collection_path}/card/{card}",
      *      operationId="Delete card",
      *      tags={"Cards"},
      *      summary="Delete card",
@@ -259,7 +259,7 @@ class CardController extends Controller
      *          {"api_token": {}}
      *      },
      *      @OA\Parameter(
-     *          name="collection_name",
+     *          name="collection_path",
      *          description="Colelction name",
      *          required=true,
      *          in="path",
@@ -297,9 +297,9 @@ class CardController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($collection_name, $card_id)
+    public function destroy($collection_path, $card_id)
     {
-        $collection = Collection::where('collection_name', $collection_name)
+        $collection = Collection::where('collection_path', $collection_path)
                                     ->where('user_id',auth()->user()->id)->first();
         if($collection){                            
             $card = $collection->cards->get($card_id);

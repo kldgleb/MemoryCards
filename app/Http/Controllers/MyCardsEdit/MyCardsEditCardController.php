@@ -10,9 +10,9 @@ use App\Models\Collection;
 class MyCardsEditCardController extends Controller
 {
     
-    public function editCard($collection_name, $card_id)
+    public function editCard($collection_path, $card_id)
     {
-        $collection = Collection::where('collection_name', $collection_name)
+        $collection = Collection::where('collection_path', $collection_path)
                                     ->where('user_id',auth()->user()->id)->first();
         $card = $collection->cards->get($card_id);
         if($collection){
@@ -28,8 +28,8 @@ class MyCardsEditCardController extends Controller
         }else return abort('404');   
     }
 
-    public function createCard($collection_name){
-        $collection = Collection::where('collection_name', $collection_name)
+    public function createCard($collection_path){
+        $collection = Collection::where('collection_path', $collection_path)
                                     ->where('user_id',auth()->user()->id)->first();
         if($collection){
             return view('MyCardsEdit.createCard',[
@@ -39,8 +39,8 @@ class MyCardsEditCardController extends Controller
 
     }
 
-    public function storeCard(CardRequest $request, $collection_name){
-        $collection = Collection::where('collection_name', $collection_name)
+    public function storeCard(CardRequest $request, $collection_path){
+        $collection = Collection::where('collection_path', $collection_path)
                                     ->where('user_id',auth()->user()->id)->first();
         if($collection){
         Card::create([
@@ -50,12 +50,12 @@ class MyCardsEditCardController extends Controller
         ]);
         }else abort('404');
 
-        return redirect()->route('MyCardsEdit.editCard',[$collection_name,0]);
+        return redirect()->route('MyCardsEdit.editCard',[$collection_path,0]);
     }
 
-    public function updateCard(CardRequest $request, $collection_name, $card_id)
+    public function updateCard(CardRequest $request, $collection_path, $card_id)
     {
-        $collection = Collection::where('collection_name', $collection_name)
+        $collection = Collection::where('collection_path', $collection_path)
                                     ->where('user_id',auth()->user()->id)->first();
                                    
         $card = $collection->cards->get($card_id);
@@ -63,18 +63,18 @@ class MyCardsEditCardController extends Controller
             $card->update($request->validated());
         }else abort('404');
         
-        return redirect()->route('MyCardsEdit.editCard',[$collection_name,$card_id]);
+        return redirect()->route('MyCardsEdit.editCard',[$collection_path,$card_id]);
     }
 
-    public function destroyCard($collection_name, $card_id)
+    public function destroyCard($collection_path, $card_id)
     {
-        $collection = Collection::where('collection_name', $collection_name)
+        $collection = Collection::where('collection_path', $collection_path)
                                     ->where('user_id',auth()->user()->id)->first();
         
         $card = $collection->cards->get($card_id);
         if($card){
         $card->delete();
         }else abort('404');
-        return redirect()->route('MyCardsEdit.editCard',[$collection_name,$card_id-1]);
+        return redirect()->route('MyCardsEdit.editCard',[$collection_path,$card_id-1]);
     }
 }
