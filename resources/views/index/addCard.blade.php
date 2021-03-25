@@ -5,7 +5,7 @@
 <h1 class="text-center">
         {{$collection->collection_name}}
 </h1>
-<form action="{{route('MyCardsEdit.storeCard',$collection->collection_path)}}" method="POST">
+<form action="{{route('storeCard',$collection->collection_path)}}" method="POST">
         @csrf
         <div class="container p-5">
         
@@ -41,13 +41,6 @@
                         <span>Завершить создание коллекции</span>
                     </a>
             </div>
-        @if ($errors->any())
-            @foreach ($errors->all() as $error)
-                <div class="alert alert-danger" role="alert">
-                    {{ $error }}
-                </div>
-            @endforeach
-        @endif
         <button type="submit" class="btn btn-outline-light">Сохранить</button>
     </div>
     @if($cards)

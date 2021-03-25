@@ -25,8 +25,8 @@ Route::group(['middleware' => 'auth'], function(){
     Route::post('/',[IndexController::class, 'store'])->name('index.store');
     Route::get('/{collection}/addCard', [IndexController::class, 'addCard'])->name('addCard');
     Route::post('/{collection}/storeCard', [IndexController::class, 'storeCard'])->name('storeCard');
-    Route::get('/{collection}/{card}',[IndexController::class,'show'])->name('index.show');
 });
+Route::get('/{collection}/{card}',[IndexController::class,'show'])->name('index.show');
 
 Route::group(['middleware' => 'auth', 'prefix' => 'MyCardsEdit'], function(){
     //card routes
