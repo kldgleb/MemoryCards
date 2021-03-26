@@ -79,7 +79,7 @@
                 <div class="row justify-content-center">
                     @foreach ($collection->cards as $card)
                         <div class="col-3 bg-dark m-2 text-center text-white">
-                            <a class="d-block p-5" href="{{route('index.show',[$collection->collection_path,$loop->index])}}">
+                            <a class="d-block p-5" href="{{route('MyCardsEdit.editCard',[$collection->collection_path,$loop->index])}}">
                             {{$card->header}}
                             </a>
                         </div>

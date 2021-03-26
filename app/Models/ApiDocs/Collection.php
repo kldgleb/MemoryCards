@@ -48,6 +48,18 @@ private $collection_name;
 
 /** 
 * @OA\Property(
+*      title="collection_path",
+*      description="Path to the colelction/automaicly generate",
+*      example="ExamplePath"
+* )
+*
+* @var string
+*/
+private $collection_path;
+
+
+/** 
+* @OA\Property(
 *      title="collection_description",
 *      description="Description of the colelction",
 *      example="Not required"

@@ -83,8 +83,14 @@ class CardController extends Controller
      *          @OA\JsonContent(ref="#/components/schemas/CardRequest")
      *      ),
      *      @OA\Response(
+     *          response=200,
+     *          description="Created",
+     *          @OA\JsonContent(ref="#/components/schemas/CardRequest")
+     *       ),
+     *      @OA\Response(
      *          response=201,
-     *          description="Created"
+     *          description="Created",
+     *          @OA\JsonContent(ref="#/components/schemas/CardRequest")
      *       ),
      *      @OA\Response(
      *          response=401,
@@ -93,6 +99,11 @@ class CardController extends Controller
      *      @OA\Response(
      *          response=404,
      *          description="Not Found"
+     *      ),
+     *      @OA\Response(
+     *          response=422,
+     *          description="Unprocessable Entity",
+     *          @OA\JsonContent(ref="#/components/schemas/CollectionRequest")
      *      )
      *     )
      */
@@ -214,7 +225,8 @@ class CardController extends Controller
      *      ),
      *      @OA\Response(
      *          response=200,
-     *          description="Updated"
+     *          description="Updated",
+     *          @OA\JsonContent(ref="#/components/schemas/CardRequest")
      *       ),
      *      @OA\Response(
      *          response=401,
@@ -223,6 +235,11 @@ class CardController extends Controller
      *      @OA\Response(
      *          response=404,
      *          description="Not Found"
+     *      ),
+     *      @OA\Response(
+     *          response=422,
+     *          description="Unprocessable Entity",
+     *          @OA\JsonContent(ref="#/components/schemas/CollectionRequest")
      *      )
      *     )
      */

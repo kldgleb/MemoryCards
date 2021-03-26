@@ -31,7 +31,11 @@ class MyCardsEditCollectionController extends Controller
         $collection = Collection::where('collection_path', $collection_path)
                                     ->where('user_id',auth()->user()->id)->first();
         if($collection){
-            $collection->update($request->validated());
+            $collection->update([
+                'collection_name'=>$request->collection_name,
+                'collection_path'=>$this->toCamelCase($request->collection_name),
+                'collection_description'=>$request->collection_decription,
+                ]);
         }else abort('404');
         return redirect()->route('MyCardsEdit.index');
         

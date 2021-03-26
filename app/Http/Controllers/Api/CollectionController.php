@@ -63,6 +63,16 @@ class CollectionController extends Controller
      *          @OA\JsonContent(ref="#/components/schemas/CollectionRequest")
      *      ),
      *      @OA\Response(
+     *          response=200,
+     *          description="",
+     *          @OA\JsonContent(ref="#/components/schemas/CollectionRequest")
+     *      ),
+     *      @OA\Response(
+     *          response=422,
+     *          description="Unprocessable Entity",
+     *          @OA\JsonContent(ref="#/components/schemas/CollectionRequest")
+     *      ),
+     *      @OA\Response(
      *          response=201,
      *          description="Created"
      *       ),
@@ -166,11 +176,17 @@ class CollectionController extends Controller
      *      ),
      *      @OA\Response(
      *          response=200,
-     *          description="Updated"
+     *          description="Updated",
+     *          @OA\JsonContent(ref="#/components/schemas/Collection")
      *       ),
      *      @OA\Response(
      *          response=401,
      *          description="Unauthenticated",
+     *      ),
+     *      @OA\Response(
+     *          response=422,
+     *          description="Unprocessable Entity",
+     *          @OA\JsonContent(ref="#/components/schemas/CollectionRequest")
      *      ),
      *      @OA\Response(
      *          response=404,
@@ -191,7 +207,11 @@ class CollectionController extends Controller
         $collection = Collection::where('collection_path', $collection_path)
                                     ->where('user_id',auth()->user()->id)->first();
         if($collection){
-            $collection->update($request->validated());
+            $collection->update([
+                'collection_name'=>$request->collection_name,
+                'collection_path'=>$this->toCamelCase($request->collection_name),
+                'collection_description'=>$request->collection_decription,
+                ]);
             return response('Updated',200);
         }
         return response('Not Found',404);
@@ -227,7 +247,8 @@ class CollectionController extends Controller
      *      @OA\Response(
      *          response=404,
      *          description="Not Found"
-     *      )
+     *      ),
+     *      
      *     )
      */
     
